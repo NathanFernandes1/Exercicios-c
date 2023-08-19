@@ -1,9 +1,9 @@
-/*Quest„o 02:
-Implementar uma funÁ„o que, dadas duas
-strings s1 e s2, crie uma nova string ñ s3 ñ
-contendo todos os caracteres de s1 que n„o 
+/*Quest√£o 02:
+Implementar uma fun√ß√£o que, dadas duas
+strings s1 e s2, crie uma nova string ‚Äì s3 ‚Äì
+contendo todos os caracteres de s1 que n√£o 
 estejam em s2.
-Nota: em s3, n„o devem existir caracteres 
+Nota: em s3, n√£o devem existir caracteres 
 repetidos*/
 #include<stdio.h>
 #include<string.h>
