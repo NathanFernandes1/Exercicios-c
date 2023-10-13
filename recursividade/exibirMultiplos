@@ -1,0 +1,32 @@
+/*Questão 03:
+Desenvolver uma função recursiva que exiba
+todos os múltiplos do número N, inferiores ou
+iguais ao valor V.*/
+
+#include<stdio.h>
+#define N 2
+#define V 10
+
+int multiplos(int n, int v);
+int multiplosRecursivo(int n, int v,int soma);
+int main(){
+	
+	multiplos(N,V);
+}
+
+int multiplos(int n, int v){
+	int soma=0;
+	
+	multiplosRecursivo(n,v,soma);
+}
+int multiplosRecursivo(int n, int v,int soma){
+
+	if(soma> v){
+		return 0;
+	}
+	else{
+		printf("%d ",soma);
+		return multiplosRecursivo(n,v,soma+n);
+			
+	}
+}
