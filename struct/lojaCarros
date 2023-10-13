@@ -1,0 +1,166 @@
+/*Questão 01:
+Uma loja de automóveis mantém os carros à
+venda sob a forma de um vetor de structs
+contendo as seguintes informações, para cada
+veículo: placa, modelo, marca, cor,
+quilometragem, ano modelo/fabricação (deve
+ser um struct), valor e tipo (usado ou 0 km,
+conforme o valor do campo quilometragem).
+Pede-se a declaração de uma variável que
+represente o estoque de veículos da loja,
+incluindo todas as declarações de tipos que
+possam ser necessárias.
+Além disso, implementar as seguintes funções:
+i. Exibir todos os carros do modelo m, ano de
+fabricação entre a1 e a2 (inclusive), com
+valor não superior a x reais;
+ii. Reajustar os valores de todos os carros 0
+km, considerando um aumento de p %;
+iii. Retirar do estoque um determinado veículo,
+dada a sua placa.*/
+
+#include<stdio.h>
+#include<string.h>
+
+#define TAM 3
+
+typedef struct{
+	int modelo,fabricacao;
+}Tano;
+
+typedef struct{
+	char placa[9], modelo[15],marca[15],cor[15], tipo[10];
+	int km;
+	float valor;
+	Tano ano;
+}Tveiculo;
+
+void preencherDados(Tveiculo estoque[]);
+void exibirTodosVeiculos(Tveiculo estoque[], int tamanho);
+void buscarExibir(Tveiculo estoque[],int tamanho,char m[],int a1,int a2,float valor);
+void exibirDadosVeiculo (Tveiculo veiculo);
+void reajustarValores(Tveiculo estoque[], int tamanho, float p);
+void removerVeiculo(Tveiculo estoque[],int tamanho, char placa[]);
+
+int main(){
+	Tveiculo estoque[TAM];
+	int ano1=2010,ano2=2020;
+	float v=35000;
+	char modelo[10],placa[10];
+	
+	strcpy(modelo,"HB20");
+	strcpy(placa,"ABC 1234");
+	
+
+	preencherDados(estoque);
+	
+	printf("Todos os veiculos:\n\n");
+	exibirTodosVeiculos(estoque,TAM);
+	
+	printf("\n\nCarros entre os anos %d e %d do modelo %s e com o preco menor que R$%.2f:\n\n",ano1,ano2,modelo,v);
+	buscarExibir(estoque,TAM,modelo,ano1,ano2,v);
+	
+	printf("\n\nCarros 0 km com o preco reajustado:\n\n");
+	reajustarValores(estoque,TAM,10);
+	
+	printf("\n\nVeiculo removido do estoque:\n\n");
+	removerVeiculo(estoque,TAM,placa);
+}
+
+void preencherDados(Tveiculo estoque[]){
+	
+    //1º carro
+	strcpy (estoque[0].placa, "ABC 1234");
+	strcpy (estoque[0].modelo, "HB20");
+	strcpy (estoque[0].marca, "HYUNDAI");
+	strcpy (estoque[0].cor, "PRATA");
+	estoque[0].km = 20000;
+	estoque[0].ano.modelo = 2016;
+	estoque[0].ano.fabricacao = 2015;
+	estoque[0].valor = 25000;
+	strcpy (estoque[0].tipo, "USADO");	
+	
+	//2º carro
+	strcpy (estoque[1].placa, "BCD 2345");
+	strcpy (estoque[1].modelo, "CIVIC");
+	strcpy (estoque[1].marca, "HONDA");
+	strcpy (estoque[1].cor, "BRANCA");
+	estoque[1].km = 0;
+	estoque[1].ano.modelo = 2022;
+	estoque[1].ano.fabricacao = 2022;
+	estoque[1].valor = 90000;
+	strcpy (estoque[1].tipo, "0KM");	
+	
+	//3º carro
+	strcpy (estoque[2].placa, "CDE 3456");
+	strcpy (estoque[2].modelo, "HB20");
+	strcpy (estoque[2].marca, "HYUNDAI");
+	strcpy (estoque[2].cor, "PRETA");
+	estoque[2].km = 45000;
+	estoque[2].ano.modelo = 2017;
+	estoque[2].ano.fabricacao = 2017;
+	estoque[2].valor = 35000;
+	strcpy (estoque[2].tipo, "USADO");
+}
+
+void buscarExibir(Tveiculo estoque[],int tamanho,char m[],int a1,int a2,float valor){
+	int i;
+	
+	for(i=0;i<tamanho;i++){
+		if((strcmp(estoque[i].modelo,m)==0)&&(estoque[i].ano.fabricacao>=a1)&&(estoque[i].ano.fabricacao<=a2)&&(estoque[i].valor<valor)){
+			exibirDadosVeiculo(estoque[i]);
+		}
+	}
+	
+}
+
+void exibirDadosVeiculo (Tveiculo veiculo)
+{
+	printf("Placa: %s\n", veiculo.placa);
+	printf("Marca/modelo: %s/%s\n", veiculo.marca, veiculo.modelo);
+	printf("Km: %.1f\n", veiculo.km);
+	printf("Ano: %d/%d\n", veiculo.ano.fabricacao, veiculo.ano.modelo);
+	printf("Valor: R$ %.2f\n", veiculo.valor);
+	printf("Tipo: %s\n\n", veiculo.tipo);
+}
+
+void reajustarValores(Tveiculo estoque[], int tamanho, float p){
+	int i;
+	p/=100;
+	for(i=0;i<tamanho;i++){
+		if(estoque[i].km==0){
+			estoque[i].valor=(estoque[i].valor*p)+estoque[i].valor;
+			exibirDadosVeiculo(estoque[i]);
+		}
+	}
+}
+
+void exibirTodosVeiculos(Tveiculo estoque[], int tamanho){
+	int i;
+	
+	for(i=0;i<tamanho;i++){
+		exibirDadosVeiculo(estoque[i]);
+	}
+}
+
+void removerVeiculo(Tveiculo estoque[], int tamanho, char placa[]){
+	int i,j;
+	
+	for(i=0;i<tamanho;i++){
+		if(strcmp(estoque[i].placa,placa)==0){
+			exibirDadosVeiculo(estoque[i]);
+			for(j=i;j<tamanho-1;j++){
+					strcpy (estoque[j].placa, estoque[j+1].placa);
+					strcpy (estoque[j].modelo, estoque[j+1].modelo);
+					strcpy (estoque[j].marca, estoque[j+1].marca);
+					strcpy (estoque[j].cor, estoque[j+1].cor);
+					estoque[j].km = estoque[j+1].km;
+					estoque[j].ano.modelo = estoque[j+1].ano.modelo;
+					estoque[j].ano.fabricacao = estoque[j+1].ano.fabricacao;
+					estoque[j].valor = estoque[j+1].valor;
+					strcpy (estoque[j].tipo, estoque[j+1].tipo);
+			}
+			
+		}
+	}
+}
