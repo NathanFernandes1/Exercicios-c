@@ -1,0 +1,35 @@
+/*Questão 04:
+Fazer uma função recursiva que, dado um
+número inteiro N, exiba o mesmo na base 2
+(binária).*/
+
+#include<stdio.h>
+
+int binarioRecursivo(int num);
+int main(){
+	int numero;
+	
+	
+	printf("Digite um numero:");
+	scanf("%d",&numero);
+	
+	binarioRecursivo(numero);
+}
+
+int binarioRecursivo(int num){
+	int resto,divisao;
+	
+	divisao=num/2;
+	resto=num%2;
+	
+	
+	if(divisao!=0){
+		
+		binarioRecursivo(divisao);
+		printf("%d",resto);
+	}
+	else{
+		printf("%d",resto);
+		return 0;
+	}
+}
