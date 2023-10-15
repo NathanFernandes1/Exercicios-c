@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+
+int verificarPalindromo(char s1[]);
+int verificarPalindromoRecursivo(char s1[], int quantC,int i);
+
+int main(){
+	
+	int quantCaracteres;
+	char string[20];
+	
+	printf("Digite a string:");
+	fflush (stdin);
+    gets(string);
+	
+	if (verificarPalindromo(string)==1){
+		printf("A string nao e um palindromo.");
+	}
+	else{
+		printf("A string e um palindromo");
+	}
+	
+	
+}
+
+int verificarPalindromo(char s1[]){
+	return verificarPalindromoRecursivo(s1,strlen(s1)-1,0);
+}
+
+int verificarPalindromoRecursivo(char s1[], int j,int i){
+		
+		if(s1[i]==s1[j]){
+			if(i<j){
+					return verificarPalindromoRecursivo(s1,j-1,i+1);
+			}
+			else{
+				return 0;
+			}
+		}
+		else{
+			return 1;
+		}
+	
+}
