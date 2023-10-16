@@ -1,8 +1,8 @@
-/*Questão 10:
-Implementar uma função recursiva que,
+/*QuestÃ£o 10:
+Implementar uma funÃ§Ã£o recursiva que,
 dados uma string str e um caracter ch,
-remova de str todas as ocorrências de ch,
-retornando o total de remoções realizadas.*/
+remova de str todas as ocorrÃªncias de ch,
+retornando o total de remoÃ§Ãµes realizadas.*/
 #include<stdio.h>
 #include<string.h>
 
@@ -12,35 +12,37 @@ int remover(char s1[],int i);
 int main(){
 	
 	char string[20],caractere;
+	int retorno;
 	
 	printf("Digite a string:");
 	fflush (stdin);
-    gets(string);
+        gets(string);
 	
 	printf("Digite o caracter a ser removido:");
 	scanf("%c",&caractere);
     
-    removerCaractere(string,caractere);
+    retorno=removerCaractere(string,caractere);
     
-    printf("string:%s",string);
+    printf("\nString apos remocao:%s\nQuantidade de caracteres removidos:%d",string,retorno);
 }
 
 int removerCaractere(char s1[], char ca){
 	
-	removerCaractereRecursivo(s1,ca,0);
+	return removerCaractereRecursivo(s1,ca,0);
 }
 
 int removerCaractereRecursivo(char s1[],char ca,int i){
+	int cont=0;
 	if(s1[i]=='\0'){
 		return 0;
 	}
 	else{
 		if(s1[i]==ca){
-			remover(s1,i);
+			cont += remover(s1,i);
 		}
 		
-			removerCaractereRecursivo(s1,ca,i+1);
-		
+			cont+=removerCaractereRecursivo(s1,ca,i+1);
+			return cont;
 	}
 }
 
@@ -51,6 +53,6 @@ int remover(char s1[],int i){
 	}
 	else{
 		s1[i]='\0';
-		return 0;
+		return 1;
 	}
 }
