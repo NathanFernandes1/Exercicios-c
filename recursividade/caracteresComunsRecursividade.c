@@ -10,9 +10,11 @@ int main() {
     char string1[20], string2[20];
     
     printf("Digite a string 1: ");
+    fflush (stdin);
     gets(string1);
     
     printf("Digite a string 2: ");
+    fflush (stdin);
     gets(string2);
     
     int resultado = caracteresComuns(string1,string2);
