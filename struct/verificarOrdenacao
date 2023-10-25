@@ -1,0 +1,95 @@
+/*Questão 03 [2,5 pontos]:
+Considere a existência do tipo TAluno contendo as
+seguintes informações sobre um aluno: nome, nota na
+AV1, nota na AV2, média e situação.
+Dado, portanto, um vetor do tipo TAluno, contendo
+quant posições, fazer uma função que verifique se o
+vetor está ordenado, conforme os seguintes critérios:
+1. As médias devem estar ordenadas de forma
+decrescente;
+2. No caso de médias iguais, os respectivos nomes
+dos alunos devem estar ordenados
+crescentemente.
+Caso o vetor esteja ordenado conforme regras citadas
+acima, a função deverá retornar a constante TRUE;
+caso contrário, FALSE.*/
+
+#include<stdio.h>
+#include<string.h>
+
+#define TRUE 0
+#define FALSE 1
+#define TAM 4
+typedef struct{
+	char nome[20],situacao[20];
+	float av1,av2,media;
+}TAluno;
+
+void inserirDados(TAluno vet[]);
+void exibirVetor(TAluno vet[], int tamanho);
+int verificarOrdenacao(TAluno vet[], int tamanho);
+
+int main(){
+	TAluno vetor[TAM];
+	int retorno;
+	
+	inserirDados(vetor);
+	exibirVetor(vetor, TAM);
+	retorno = verificarOrdenacao(vetor,TAM);
+	
+	printf("%d ",retorno);
+}
+
+void inserirDados(TAluno vet[]){
+	
+	strcpy (vet[0].nome, "CARLOS");
+	vet[0].av1= 10;
+	vet[0].av2= 10;
+	vet[0].media= 10;
+	strcpy (vet[0].situacao, "APROVADO");
+	
+	
+	strcpy (vet[1].nome, "BRUNO");
+	vet[1].av1= 9;
+	vet[1].av2= 9;
+	vet[1].media= 9;
+	strcpy (vet[1].situacao, "APROVADO");
+	
+	
+	strcpy (vet[2].nome, "AGATHA");
+	vet[2].av1= 7;
+	vet[2].av2= 7;
+	vet[2].media= 7;
+	strcpy (vet[2].situacao, "APROVADO");
+	
+	
+	strcpy (vet[3].nome, "PATRICA");
+	vet[3].av1= 7;
+	vet[3].av2= 7;
+	vet[3].media= 7;
+	strcpy (vet[3].situacao, "APROVADO");
+	
+	
+}
+void exibirVetor(TAluno vet[], int tamanho) {
+	int i;
+    printf("Nome\tAV1\tAV2\tMedia\tSituacao\n");
+    for( i = 0; i < tamanho; i++) {
+        printf("%s\t%.2f\t%.2f\t%.2f\t%s\n", vet[i].nome, vet[i].av1, vet[i].av2, vet[i].media, vet[i].situacao);
+    }
+}
+int verificarOrdenacao(TAluno vet[], int tamanho){
+	int i;
+	
+	for(i=0;i<tamanho-1;i++){
+		if(vet[i].media<vet[i+1].media){
+			return FALSE;
+		}
+		if(vet[i].media==vet[i+1].media){
+			if((strcmp(vet[i].nome,vet[i+1].nome))>0){
+				return FALSE;
+			}
+		}
+	}
+	return TRUE;
+}
