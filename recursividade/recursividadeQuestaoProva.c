@@ -9,6 +9,7 @@ preencha as suas posições com os valores de TAM
 int preencherVetor(int vet[],int tamanho);
 int	preencherVetorRecursivo(int vet[],int tamanho,int i);
 void exibirVetor(int vet[],int tamanho);
+
 int main(){
 	int vetor[TAM],i;
 	
