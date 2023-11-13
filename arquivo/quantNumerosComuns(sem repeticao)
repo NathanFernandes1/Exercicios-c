@@ -1,0 +1,86 @@
+/*Questão 02 [2,5 pontos]:
+Implementar uma função que, dados dois arquivos
+textos arquivoA e arquivo,contendo números inteiros,
+um por linha, sem repetições, determine o número de 
+elementos comuns entre os dois arquivos.*/
+
+#include <stdio.h>
+
+int lendoArquivo (char nomeArq[], char nomeArqA[]);
+int lendoArquivoA(char nomeArqA[],int numero);
+
+int main(){
+	
+	char nomeArquivo[100],nomeArquivoA[100];
+	int quant;
+	
+	printf ("Entre com o nome do arquivo : ");
+	fflush (stdin);
+	gets (nomeArquivo);
+	
+	printf ("Entre com o nome do arquivo A: ");
+	fflush (stdin);
+	gets (nomeArquivoA);
+	
+	quant = lendoArquivo (nomeArquivo,nomeArquivoA);
+	
+	printf("Quantidade de numeros comuns: %d ",quant);
+}
+
+int lendoArquivo (char nomeArq[], char nomeArqA[]){
+		
+		int cont=0,numero;
+		FILE *arq;
+		
+		arq = fopen (nomeArq, "r");
+			if (!arq)
+	{
+		return -1;	//representando que houve erro
+	}
+	else
+	{
+		//lendo todos os caracteres do arquivo
+		while (fscanf (arq, "%d", &numero) != EOF)
+		{
+			
+			if(lendoArquivoA(nomeArqA,numero)==1){
+				cont++;
+			}
+		
+		}
+		
+		//fechando o arquivo
+		fclose (arq);
+		return cont;
+		//retornando a quantidade de caracteres do arquivo
+	}
+}
+
+int lendoArquivoA(char nomeArqA[],int numero){
+	int num;
+	FILE *arqA;
+	
+	arqA = fopen (nomeArqA, "r");
+		if (!arqA)
+	{
+		return -1;	//representando que houve erro
+	}
+	else
+	{
+		//lendo todos os caracteres do arquivo
+		while (fscanf (arqA, "%d", &num) != EOF)
+		{
+			
+			if(num==numero){
+				fclose (arqA);
+				return 1;
+			}
+		
+		}
+		
+		//fechando o arquivo
+		fclose (arqA);
+		return 0;
+		//retornando a quantidade de caracteres do arquivo
+	}
+}
